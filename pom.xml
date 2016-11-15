@@ -15,7 +15,7 @@
     </properties>
 
     <build>
-        <finalName>messaging-client-servlet</finalName>
+        <finalName>mdb-messaging-client</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
