@@ -8,13 +8,13 @@ import javax.inject.Inject;
 import javax.jms.*;
 
 /**
- * It is not necessary that MyQueue is contained in the local JNDI. The Queue will by looked up remotely on the message
+ * It is not necessary that test.queue is contained in the local JNDI. The Queue will by looked up remotely on the message
  * broker.
  */
 @ResourceAdapter("remote-artemis") // name of the local pooled-connection-factory to be used
 @MessageDriven(activationConfig = {
         @ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "MyRemoteQueue")
+        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:jboss/exported/jms/queue/artemis/test.queue")
 })
 public class MessageReceiverWithoutLocalJNDI implements MessageListener {
 
