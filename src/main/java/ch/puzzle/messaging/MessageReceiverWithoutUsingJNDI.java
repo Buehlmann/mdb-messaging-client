@@ -14,15 +14,16 @@ import javax.jms.*;
 @ResourceAdapter("remote-artemis") // name of the local pooled-connection-factory to be used
 @MessageDriven(activationConfig = {
         @ActivationConfigProperty(propertyName = "useJNDI", propertyValue = "false"),
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "java:jboss/exported/jms/queue/artemis/test.queue")
+        @ActivationConfigProperty(propertyName = "destination", propertyValue = "test.queue"), // physical name of the destination on the message broker
+        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")
 })
-public class MessageReceiverWithoutLocalJNDI implements MessageListener {
+public class MessageReceiverWithoutUsingJNDI implements MessageListener {
 
     @Inject
     @JMSConnectionFactory("java:/jms/RemoteArtemisConnectionFactory")
     private JMSContext context; // used to send a message
 
     public void onMessage(Message message) {
-        System.out.println("Got Message: " + message.toString());
+        System.out.println("Received Message in MessageReceiverWithoutUsingJNDI:\n   " + message.toString());
     }
 }

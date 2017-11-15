@@ -12,11 +12,12 @@ import javax.jms.MessageListener;
  */
 @ResourceAdapter("remote-artemis") // name of the local pooled-connection-factory to be used
 @MessageDriven(activationConfig = {
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/queue/test.queue") // mapped on: <jms-queue name="test.queue" entries="java:/jms/queue/test.queue "/>
-        })
+        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/queue/test.queue"), // mapped on: <jms-queue name="test.queue" entries="java:/jms/queue/test.queue "/>
+        @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")
+})
 public class MessageReceiverWithLocalJNDI implements MessageListener {
 
     public void onMessage(Message message) {
-        System.out.println("Got Message: " + message.toString());
+        System.out.println("Received Message in MessageReceiverWithLocalJNDI:\n   " + message.toString());
     }
 }
